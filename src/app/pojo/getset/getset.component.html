@@ -1,0 +1,21 @@
+<div *ngIf="att.getset==='both' || att.getset==='get'">
+    <div *ngIf="att.dataType!=='boolean'">
+<pre>public {{att.dataType}} get{{att.attCapName}}() {{openCurly}}
+  return {{att.attName}};
+{{closeCurly}}</pre>
+        </div>
+</div>
+
+<div *ngIf="att.getset==='both' || att.getset==='get'">
+    <div *ngIf="att.dataType==='boolean'">
+<pre>public {{att.dataType}} is{{att.attCapName}}() {{openCurly}}
+  return {{att.attName}};
+{{closeCurly}}</pre>
+    </div>
+  </div>
+
+<div *ngIf="att.getset==='both' || att.getset==='set'">
+<pre>public void set{{att.attCapName}}({{att.dataType}} {{att.attName}}) {{openCurly}}
+  this.{{att.attName}}={{att.attName}};
+{{closeCurly}}</pre>
+</div>

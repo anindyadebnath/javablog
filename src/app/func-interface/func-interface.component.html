@@ -1,0 +1,113 @@
+<div class="row">
+<h2>Functional Interface <span style="font-weight: bold">Supplier, Consumer, Predicate</span></h2>
+<hr>
+<p class="ad-p"><a target="_blank" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8-b132/java/util/function/Supplier.java">Supplier</a>, <a target="_blank" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8-b132/java/util/function/Consumer.java">Consumer</a> and
+  <a target="_blank" href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8-b132/java/util/function/Predicate.java">Predicate</a> are most important Functional Interface in Java SE8. We will discuss each of them to know When and How to use in real life scenario.</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Supplier</th>
+      <th>Consumer</th>
+      <th>Predicate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span style="font-weight: bold">Return</span></td>
+      <td>It returns the type of data we <br/>
+        mention in <code>Supplier{{oA}}T{{cA}}</code> </td>
+      <td>It doesn't return anything.</td>
+      <td>It returns a boolean value.</td>
+    </tr>
+    <tr>
+      <td><span style="font-weight: bold">Argument</span></td>
+      <td>It doesn't take any Object as argument.<br/>
+        absrtact method Signature <code>T get()</code></td>
+      <td>It takes any Object as argument. <br/>
+        absrtact method Signature <code>void accept(T t)</code></td>
+      <td>It takes any Object as argument. <br/>
+        absrtact method Signature <code>boolean test(T t)</code></td>
+    </tr>
+    <tr>
+      <td><span style="font-weight: bold">Use</span></td>
+      <td>Need to change/set data, based on any<br/> Condition or without Condtion.</td>
+      <td>Need to do any task on Object but <br/>no return required.</td>
+      <td>Need to check any condition of Object and <br/>return the flag.</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h3>Use of Supplier with example</h3>
+<hr>
+<p class="ad-p">Let's first take an Example of <span class="methods">Supplier</span>.</p>
+<p class="ad-p">An insurance Company has around 800 Users. They want to assign a Tier Plan for each of the user according to their age. For below and equal to the age 18 <span class="methods">Baby Plan</span> and Above 18 
+  <span class="methods">Standard Plan.</span></p>
+<code>Tier.java</code>
+<pre style="width:600px">
+<span class="java-key">public class</span> Tier {{oC}}
+	
+   <span class="java-key">private</span> String <span class="methods">tierName</span>;
+   <span class="java-key">private int</span> <span class="methods">months</span>;
+      
+   <span class="java-key">public</span> Tier(String tierName, int months) {{oC}}
+      <span class="java-key">super</span>();
+      <span class="java-key">this</span>.<span class="methods">tierName</span> = tierName;
+      <span class="java-key">this</span>.<span class="methods">months</span> = months;
+    }	
+}
+</pre>
+<code>User.java</code>
+<pre style="width:600px">
+<span class="java-key">public class</span> User {{oC}}
+
+  <span class="java-key">private</span> String <span class="methods">userName</span>;
+  <span class="java-key">private</span> Tier <span class="methods">tier</span>;
+  <span class="java-key">private int</span> <span class="methods">age</span>;
+      
+  <span class="java-key">public</span> User(String userName, int age) {{oC}}
+    <span class="java-key">super</span>();
+    <span class="java-key">this</span>.<span class="methods">userName</span> = userName;
+    <span class="java-key">this</span>.<span class="methods">age</span> = age;
+  }
+  <span class="java-key">public int</span> getAge () {{oC}}
+    <span class="java-key">return</span> <span class="methods">age</span>;
+  }
+  <span class="java-key">public void</span> setAge(<span class="methods">int</span> age) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">age</span> = age;
+  }
+  <span class="java-key">public</span> Tier getTier() {{oC}}
+    <span class="java-key">return</span> <span class="methods">tier</span>;
+  } 
+  <span class="java-key">public void</span> setTier(Tier tier) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">tier</span> = tier;
+  }
+} 
+</pre>
+<code>TierDriver.java</code>
+<pre style="width: 600px">
+<span class="java-key">public class</span> TierDriver {{oC}}
+
+  <span class="java-key">public static void</span> main(String[] args) {{oC}}
+      Supplier{{oA}}Tier{{cA}} babyTier=()->{{oC}}<span class="java-key">return new </span>Tier(<span class="methods">"Baby"</span>, 60);};
+      Supplier{{oA}}Tier{{cA}} standardTier=()->{{oC}}<span class="java-key">return new </span>Tier(<span class="methods">"Standard"</span>, 120);};
+        
+      List{{oA}}User{{cA}} users= UserFactory.getUsers();
+      <span class="java-key">for</span>(User user : users){{oC}}
+        <span class="java-key">if</span>(user.getAge(){{oA}}=18){{oC}}
+          user.setTier(<mark>babyTier.get()</mark>);
+        }<span class="java-key">else</span>{{oC}}
+          user.setTier(<mark>standardTier.get()</mark>);
+        }
+      }
+  }
+}
+</pre>
+<p class="ad-p">I think from the above example you got a clearly idea how can we use <span class="methods">Supplier</span>.</p>
+<div class="row">
+  <div style="float: right">
+      <a href="/supplier-consumer-predicate/page/1" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>
+  </div>
+</div>
+</div>
+

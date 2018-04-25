@@ -1,0 +1,71 @@
+<div class="row">
+  <br/>
+  <h2>How to use deepEquals</h2>
+  <hr>
+<pre style="width: 500px"><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</pre> 
+<p class="ad-p">I don't know How many of us use this method. Let's jump into this to know what the method does.</p>
+<ul>
+  <li class="ad-p">It first check if <code>a==b</code> and basic <code>null</code>check</li>
+  <li class="ad-p">if a and b both are object array it call's Array's deepEquals0 ,ethod</li>
+  <li class="ad-p">if a and b both are not array of object or primitive data type, it calls data type's equals method</li>
+</ul>
+
+<p class="ad-p">Let's assume we have two sets of Employee, if we try to check the equality by calling <code>Objects.deepEquals</code> method It will ultimately call <code>AbstractSet.equals</code> method.
+Same for List also, <code>AbstractList.equals</code> method will be called.</p>
+
+<p class="ad-p">Add the following equals and hashCode function in Employee class</p>
+<pre style="width:500px">
+  <span class="java-key">public int </span>hashCode(){{oC}}
+    <span class="java-key">return </span>111*<span class="methods">name</span>.hashCode();
+  {{cC}}
+  
+  <span class="java-key">public boolean </span>equals(Object obj){{oC}}
+    <span class="java-key">if</span>(!(obj <span class="java-key">instanceof </span>Employee) || Objects.isNull(obj))
+      <span class="java-key">return false</span>;
+    
+    Employee emp=(Employee)obj;
+    <span class="java-key">return </span>(emp.<span class="methods">id</span>==<span class="methods">id</span>);
+  {{cC}}
+</pre>
+
+
+<code>ObjectsUtil.java</code>
+<pre style="width:800px">
+  <span class="java-key">public class </span> ObjectsUtil {{oC}}
+    <span class="java-key">public static void </span>main(String[] args) {{oC}}
+      Employee e1=<span class="java-key">new </span>Employee(1, "Alex");
+      Employee e2=<span class="java-key">new </span>Employee(2, "Miller");
+      Employee e3=<span class="java-key">new </span>Employee(3, "Justin");
+
+      List{{openAngle}}Employee{{closeAngle}} list1=new ArrayList{{openAngle}}{{closeAngle}}();
+      list1.add(e1);list1.add(e2);list1.add(e3);
+      
+      List{{openAngle}}Employee{{closeAngle}} list2=new ArrayList{{openAngle}}{{closeAngle}}();
+      list2.add(e1);list2.add(e2);list2.add(e3);
+      
+      Set{{openAngle}}Employee{{closeAngle}} empSet1=new HashSet{{openAngle}}{{closeAngle}}();
+      empSet1.add(e1);empSet1.add(e2);empSet1.add(e3);
+      
+      Set{{openAngle}}Employee{{closeAngle}} empSet2=new HashSet{{openAngle}}{{closeAngle}}();
+      empSet2.add(e1);empSet2.add(e2);empSet2.add(e3);
+
+      System.<span class="methods">out</span>.println(<span class="methods">"Employee e1 and e2 are equal:"</span>>+Objects.deepEquals(e1, e2));
+      System.<span class="methods">out</span>.println(<span class="methods">"Employee List list1 and list are equal:"</span>+Objects.deepEquals(list1, list2));
+      System.<span class="methods">out</span>.println(<span class="methods">"Employee List list1 and list are equal:"</span>+list1.equals(list2));
+  
+      System.<span class="methods">out</span>.println(<span class="methods">"Employee Set empSet1 and empSet2 are equal:"</span>+Objects.deepEquals(empSet1, empSet2));
+      System.<span class="methods">out</span>.println(<span class="methods">"Employee Set empSet1 and empSet2 are equal:"</span>+empSet1.equals(empSet2));
+          
+    {{cC}}
+  {{cC}}
+</pre>
+<br/>
+<code>Output</code>
+<pre style="width:500px">
+  Employee e1 and e2 are equal:false
+  Employee List list1 and list are equal:true
+  Employee List list1 and list are equal:true
+  Employee Set empSet1 and empSet2 are equal:true
+  Employee Set empSet1 and empSet2 are equal:true
+</pre>
+</div>  

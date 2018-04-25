@@ -1,0 +1,167 @@
+<title>Stream_API</title>
+<div class="row">
+    <h2>What is Stream?</h2>
+    <hr>
+    <ul class="ad-p">
+        <li>Stream is a sort of Itarator. Stream is abstraction which represents zero or more values.</li>
+        <li>Stream is not a Collection. Valuse might not be stored.</li>
+        <li>It represents sequence of elements which supports sequential or parallel operation.</li>
+    </ul>
+    <br>
+    <h2>What is Stream Pipeline?</h2>
+    <hr>
+    <p class="ad-p">To perform a task over a source, stream operations are composed into a stream pipeline.  A Stream Pipeline is composed of</p>
+    <ul class="ad-p">
+        <li>A Source (Source might be a collection, an array, an I/O channel etc)</li>
+        <li>zero or more intermediate operations.</li>
+        <li>and a terminal operation.</li>
+    </ul>
+    <p class="ad-p">Below is an example of Stream Pipeline.</p>
+    <pre style="width:700px">
+        IntStream inputs=IntStream.rangeClosed(1, 100);
+        <span class="java-key">long</span> evenCount=inputs                                   <span class="methods">--Source</span>
+                            .filter(elt->{{oC}}<span class="java-key">return</span> elt%2==0;})    <span class="methods">--intermediate operation</span>
+		            .count();                           <span class="methods">--terminal operation</span>
+    </pre>
+
+    <p class="ad-p">Let's first discus about some importatnt intermediate function of Stream.</p>
+    <ul class="ad-p" style="color: #337ab7">
+        <li>How to find distinct element.</li>
+        <li>How to filter out element.</li>
+        <li>How to modify element and extract from a stream using map.</li>
+        <li>How to know which element passed a certain point in a pipeline.</li>
+        <li>How to sort using sorted function in stream.</li>
+    </ul>
+    <br>
+    <p class="ad-p">Some importatnt terminal operation of Stream.</p>
+    <ul class="ad-p" style="color: #337ab7">
+        <li>Use of collect function.</li>
+        <li>How to use reduce function.</li>
+    </ul>
+    <br>
+    <h2>How to find distinct element from a stream.</h2>
+    <hr>
+    <p class="ad-p">To get distinct element from a stream we have to override equals and hashCode function. For all of the stream example we will be using Student Object which has
+        attribute like int id, String userName, int standard. We are not going to cover how to write equals and hashCode here. Our main goal is to learn stream API.</p>
+    <p class="ad-p">I have added equals function based on id and standard, which means we will not allow duplicate id for same standard.</p>
+    <pre style="width: 700px">
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> distStudents= students.stream()
+                                        .distinct()
+                                        .collect(Collectors.toList());
+    </pre>
+    <p class="ad-p">First line we have fetched all students data and stored in a List. In second line we have created a stream by calling <code>students.stream()</code>. <br>
+    Next we have applied an aggregate function <code>distinct()</code> which will return a stream of distinct students based on our equals and hashCode. <br>
+    at last we are calling a terminal operation to return back our stream as a Student List.</p>
+    <br>
+    <h2>How to filter out element from a stream.</h2>
+    <hr>
+    <p class="ad-p">Assume we want to filter out the High School Students from our Students List. We have added below static function to check whether Student is High school Student or not.</p>
+    <pre>
+    <span class="java-key">public static boolean</span> isHighSchoolStudent(Student student) {{oC}}
+        <span class="java-key">return</span> (student.standard>10)?<span class="java-key">true</span>:<span class="java-key">false</span>;
+    }
+    </pre>
+    <p class="ad-p">Let's find out all High School Students from the Student List.</p>
+    <pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> highSchoolStudents= students.stream()
+                                              .filter(Student::isHighSchoolStudent)
+                                              .collect(Collectors.toList()); 
+    </pre>
+    <p class="ad-p"><code>fileter()</code> function expects a Predicate as argument. We already cover what is predicate and how to use that.
+    Here we have used Method Reference to filter out all High School Students.</p>
+    <br>
+    <h2>How to modify element and extract from a stream using map.</h2>
+    <hr>
+    <p class="ad-p">Assume we need all High School student name in Upper Case. Let's modify our code.</p>
+    <pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> highSchoolStudents= students.stream()
+                                                .filter(Student::isHighSchoolStudent)
+                                                .map(elt->{{oC}}
+                                                    elt.setUserName(elt.getUserName().toUpperCase());
+                                                    <span class="java-key">return</span> elt;
+                                                })
+                                                .collect(Collectors.toList());   
+    </pre>
+    <p class="ad-p"><code>map()</code>expects a <code>Function</code> (Please visit <a href="#/method-reference">method reference</a> to know more about function), we have implemented this function such a way that it returns
+     a student object after modification.</p>
+     <br>
+     <h2>How to know which element passed a certain point in a pipeline.</h2>
+     <hr>
+     <p class="ad-p">In real life we need to debug to track the status of an object and Stream API provides such as function <code>peek()</code>, which allows to see
+     object status or which object is picked up for a certain operation.</p>
+     <p class="ad-p"><code>toString()</code> has been added to know the details of the Student Object.</p>
+     <pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> distStudents= students.stream()
+                                        .distinct()
+                                        .peek(elt->System.out.println(elt))
+                                        .collect(Collectors.toList());
+     </pre>
+     <p class="ad-p"><code>peek()</code> function expects a <code>Consumer</code>(Please visit <a href="#/supplier-consumer-predicate">supplier-consumer-predicate</a> to know more about Consumer) as argument, which means modifaction is not allowed.
+    This is a very handy function for debuging purpose.</p>
+    <br>
+    <h2>How to sort using sorted function from stream API.</h2>
+    <hr>
+    <p class="ad-p">In Stream API we have two function to get sorted stream.</p>
+    <ul class="ad-p" style="color: #337ab7">
+        <li>sorted( )</li>
+        <li>sorted(Comparator)</li>
+    </ul>
+    <p class="ad-p">Let's first start with <code>sorted()</code> without argument. To get sorted stream for Student Object our Student class should have implementation of <code>Comparable</code> Interface. 
+    Please add below code snippet to your Student class.</p>
+    <pre>
+    @Override
+    <span class="java-key">public int</span> compareTo(Student o) {{oC}}
+        <span class="java-key">if</span>(id==o.id)
+            <span class="java-key">return</span> 0;
+        <span class="java-key">else if</span>(id>o.id)
+            <span class="java-key">return</span> 1;
+        <span class="java-key">else</span>
+            <span class="java-key">return</span> -1;
+    }
+    </pre>
+    <p class="ad-p">We wil be sorting our students in ascending order based on their id.</p>
+    <pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> soertedStudents= students.stream()
+                                            .sorted()
+                                            .collect(Collectors.toList());
+    </pre>
+    <p class="ad-p">I personally don't recommend this function (with out argument) for sorting. Because, if we want to change our sorting criteria we need to change 
+        <code>compareTo</code> function again. Moreover multiple sorting critaria can not be implemented. We will see the example very soon.</p>
+    <p class="ad-p">Now, delete the Comparable implementation which we have added before. We will see how to use Comparator as an argument of sorted function. <br>
+    We will create two comparator one is standardCompare and another is idCompare like below.</p>
+    <pre>
+    Comparator{{oA}}Student> standardCompare=(s1,s2)->{{oC}}
+        <span class="java-key">if</span>(s1.getStandard()==s2.getStandard())
+            <span class="java-key">return</span> 0;
+        <span class="java-key">else if</span>(s1.getStandard()>s2.getStandard())
+            <span class="java-key">return</span> 1;
+        <span class="java-key">else</span>
+            <span class="java-key">return</span> -1;
+        };
+        
+    Comparator{{oA}}Student> idCompare=(s1,s2)->{{oC}}
+        <span class="java-key">if</span>(s1.getId()==s2.getId())
+            <span class="java-key">return</span> 0;
+        <span class="java-key">else if</span>(s1.getId()>s2.getId())
+            <span class="java-key">return</span> 1;
+        <span class="java-key">else</span>
+            <span class="java-key">return</span> -1;
+    };
+    </pre>
+<p class="ad-p">Assume, we want sorting of id will be according to the standard of student. Which means we will first sort according to the standard then id.</p>
+<pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    List{{oA}}Student> students1= students.stream()
+                                    .sorted(standardCompare.thenComparing(idCompare))
+                                    .collect(Collectors.toList());   
+</pre>
+<p class="ad-p">See, How easy it is to sort by stream.</p>
+<!-- <br>
+<h2>Use of collect function.</h2>
+<hr> -->
+</div>

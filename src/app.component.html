@@ -1,0 +1,53 @@
+<div class="ad-container">
+    <mat-toolbar color="primary">
+        <a  class="btn btn-primary" style="background-color:#3f51b5;border: none">
+            <span style="font-size: 25px;border: none" class="glyphicon glyphicon-th-list" (click)="snav.toggle()"></span></a>
+        <h2 class="site-name">java-lovers</h2>
+        <span class="ad-fill-remaining-space"></span>
+    
+        <a *ngIf="!isMobile" mat-button (click)="openAboutMe()">About</a>
+        <a *ngIf="!isMobile" mat-button (click)="openContactUs()">Contact</a> 
+        <a  *ngIf="!isMobile" routerLink="/" mat-button>Home</a>
+        <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="isMobile">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button routerLink="/" mat-menu-item>
+              <mat-icon>home</mat-icon>
+              <span>Home</span>
+            </button>
+            <button (click)="openAboutMe()" mat-menu-item>
+                <mat-icon>perm_identity</mat-icon>
+                <span>About Me</span>
+              </button>
+            <button (click)="openContactUs()" mat-menu-item>
+              <mat-icon>email</mat-icon>
+              <span>Contact Us</span>
+            </button>
+          </mat-menu> 
+        </mat-toolbar>
+    <mat-sidenav-container class="ad-sidenav-container">
+        <mat-sidenav class="ad-sidenav" #snav [style.width.px]="isMobile ? 230 : 230" [mode]="isMobile ? 'over' : 'side'">
+            <mat-nav-list style="color:#fff">
+                <ul class="ad-menu-left">
+                    <h3 class="left"><span class="left_h2">Utility</span></h3>
+                    <li (click)="snav.toggle()"><a routerLink="/pojo">Create Pojo</a></li>
+                    <h3 class="left"><span class="left_h2">Java8</span></h3>
+                    <li (click)="snav.toggle()" (click)="setTitle('Utility Methods of Objects')"><a  routerLink="/objects">Objects methods</a></li>
+                    <li (click)="snav.toggle()" (click)="setTitle('java lambda expression')"><a routerLink="/lambda">Lambda Expression</a></li>
+                    <li (click)="snav.toggle()" (click)="setTitle('supplier-consumer-predicate')"><a routerLink="/supplier-consumer-predicate">Supplier,Consumer,Predicate</a></li>
+                    <li (click)="snav.toggle()" (click)="setTitle('Interface static and default method')"><a routerLink="/interface">Interface (static and default)</a></li>
+                    <li (click)="snav.toggle()" (click)="setTitle('Method Reference')"><a routerLink="/method-reference">Method Reference</a></li>
+                    <li (click)="snav.toggle()" (click)="setTitle('java Stream API')"><a routerLink="/stream-API">Stream API</a></li>
+                </ul>
+            </mat-nav-list>
+        </mat-sidenav>
+        <!-- <mat-sidenav opened mode="side" position="end">End content</mat-sidenav> -->
+
+        <mat-sidenav-content>
+                <div [ngClass]="isMobile?'ad-content-padding-mobile col-md-12':'ad-content-padding col-md-12'">
+                        <router-outlet></router-outlet>          
+                    </div> 
+          </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,55 @@
+<h2>Inteface, static and default method </h2>
+    <hr>
+<p class="ad-p">Prior to java SE8, Defination of an Interface was Abstract type and to use it's behavior a class must has to implement. But in java SE8 <span class="methods">default</span> and <span class="methods">static</span> method may have their implementation in Interface defination.</p>
+<p class="ad-p">Default, which is preselected. So, It means Inteface is giving us an option or opportunity to make a method which can be used as default if we don't want to override.</p>
+<p class="ad-p">Contradictory, static implemenation does not allow us to override.</p>
+<p class="ad-p">Let's summerize our understanding. When we are definite about any behavior implementation of our Inteface, we will go for default method. But when we dont want to override our behavior we will use static method.</p>
+<p class="ad-p">In real life we might have written DAO (Data access object) Interface layer for Users and definitly we wrote an abstract method to get single user data also. Can we make this abstract method to default implementation. Let's see in Example.</p>
+<code>IUserDao.java</code>
+<pre>
+  <span class="java-key">public interface</span> IUserDao{{oC}}
+	
+      List{{oA}}User{{cA}} getUsers();
+      
+      <span class="java-key">default</span> User getUserByCondition(Predicate{{oA}}User{{cA}} pred){{oC}}
+        <span class="java-key">for</span>(User user:getUsers()){{oC}}
+          <span class="java-key">if</span> (pred.test(user))
+            <span class="java-key">return </span>user; 
+        }
+        <span class="java-key">return null</span>;
+      }
+  }
+</pre>
+<p class="ad-p">We have created one Interface <code>IUserDao.java</code> for Users details. We wrote a default method to retrieve a single user data based on the condition.</p>
+<code>UserDao.java</code>
+<pre>
+    <span class="java-key">public class</span>  UserDao <span class="java-key">implements</span> IUserDao{{oC}}
+	
+      @Override
+      <span class="java-key">public </span> List{{oA}}User{{cA}} getUsers() {{oC}}
+        <span class="java-key">return</span> UserFactory.getUsers();
+      }
+    
+      <span class="java-key">public static void </span>main(String[] args) {{oC}}
+        Predicate{{oA}}User{{cA}} agePredicate=user->{{oC}}return (user.getAge()==40)?<span class="java-key">true</span>:<span class="java-key">false</span>;};
+        User user=<span class="java-key">new </span> UserDao().getUserByCondition(agePredicate); 
+      }
+    }
+</pre>
+<p class="ad-p">We have implemented only one method of the interface IUserDao to get all Users details. We also declared a Predicate to test our condtion to fetch a user whose age is 40. Passing the predicate in our default method of Interface we can easily get user details. Hope, you can understand this example.</p>
+<p class="ad-p">Suppose we want to know among how many users we are fetching one user details. This requirement is not present in our default method implementation. We have to override our method then.</p>
+<p class="ad-p">Add the following method in <code>UserDao.java</code></p>
+<pre>
+    @Override
+    <span class="java-key">public </span> User getUserByCondition(Predicate{{oA}}User{{cA}} pred) {{oC}}
+      List{{oA}}User{{cA}} users=getUsers();
+      System.<span class="methods">out</span>.println(<span class="methods">"Total User: "</span>+users.size());
+      <span class="java-key">for</span>(User user:users){{oC}}
+        <span class="java-key">if</span> (pred.test(user))
+          <span class="java-key">return </span>user;
+      }
+      <span class="java-key">return null</span>;
+    }
+</pre>
+<p class="ad-p">After overriding the default method now we are able to get Users count also.</p>
+<p class="ad-p">If we want to use <span class="methods">static</span> method implementation in our Interface then we are not allowed to override. This is the main differnece between default and static. Otherwise they are same in functional prospective.</p>

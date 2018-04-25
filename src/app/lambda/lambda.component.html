@@ -1,0 +1,59 @@
+<div class="row">
+  <h2>Lambda <code>-></code> Expression and syntax</h2>
+    <hr>
+<p class="ad-p">The most important and known feature of Java 8 is Lambda. Lambda is a anonymous function. Lambda expression lets us to define a class with single method (abstract) in a very concise manner. Let's take an example to understand without wasting time.</p>
+<code>Flyable.java</code>
+<pre style="width: 500px">
+  <span class="java-key">public interface </span>Flyable {{oC}}
+    <span class="java-key">public void </span>fly();
+  {{cC}}
+</pre>
+<code>Speakable.java</code>
+<pre style="width: 500px">
+  <span class="java-key">public interface </span>Speakable {{oC}}
+    <span class="java-key">public void </span>speak(String birdName);
+  {{cC}}
+</pre>
+<p class="ad-p"><span class="methods">Flyable,Speakable</span> are Functional Ineteface. An Inteface is called Functional Interface where we have only one abstract method to implement.</p>
+<code>Bird.java</code>
+<pre style="width: 700px">
+  <span class="java-key">public class </span>Bird {{oC}}
+
+    <span class="java-key">public static void</span> main(String[] args) {{oC}}
+      
+      //prior to Java se8
+      Flyable oldBird=<span class="java-key">new</span> Flyable() {{oC}}
+        @Override
+        <span class="java-key">public void</span> fly() {{oC}}
+          System.<span class="methods">out</span>.println(<span class="methods">"Old Bird is flying slow"</span>);				
+        }
+      };	
+      oldBird.fly();
+      
+      //abstract method implementation with lambda with out parameter
+      Flyable newBird=()->System.<span class="methods">out</span>.println(<span class="methods">"New Bird is flying fast"</span>);
+      newBird.fly();
+      
+      //with parameter
+      Speakable bird=(name)->System.<span class="methods">out</span>.println(name+<span class="methods">" can speak."</span>);
+      bird.speak(<span class="methods">"Sparrow"</span>);
+    }
+  }
+</pre>
+<code>Output</code>
+<pre style="width: 500px">
+Old Bird is flying slow
+New Bird is flying fast
+Sparrow can speak.
+</pre>
+<p class="ad-p">Let's try to find out the meaning of lambda syntax. <code>()-></code></p>
+<img style="width:1000px" src="../assets/lambda1.JPG" alt="Lambda">
+<p class="ad-p">To understand better I am removing the sign -> and ( ) . So, the expression becomes <code>()fly{{oC}}}</code></p>
+<p class="ad-p">In method signature we are not passing any argument that's why it's blank. To pass any argument, mention it in between of parenthesis. <code>(name)->System.out.println(name+" can speak.");</code> </p>
+<p class="ad-p">We don't need to provide function name because Functional Interface has only one abstract method. So, Instead of name we write <span class="java-key">-></span> .</p>
+<p class="ad-p">If you are writing code in Eclipse and hover over the pointer on -> , you can see </p>
+<img style="width:1000px" src="../assets/lambda2.jpg" alt="Lambda">
+<p class="ad-p">It <code>-></code> is expecting a function with a String parameter.</p>
+<p class="ad-p">Writing lambda expression is just opposite of regular method implementation. Regular Method: <code>regMethod(value){{oC}}}</code>, Lambda Expression: <code>(value)->{{oC}}}</code></p>
+<p class="ad-p">Hope, Now you have a clear idea of Lambda and how to use it. We will see more example of Lambda in coming tutorial.</p>
+</div>

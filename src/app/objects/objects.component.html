@@ -1,0 +1,98 @@
+<div class="row" style="padding-left: 12px">
+<div class="row" >
+    <h2>New utility methods in Objects added in Java 8</h2>
+    <hr>
+  <div class="col-md-8">
+<pre>
+<span class="java-key">public static boolean </span><span>isNull (</span><span class="methods">Object </span><span>obj)</span>
+<span class="java-key">public static boolean </span><span>nonNull (</span><span class="methods">Object </span><span>obj)</span>
+<span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj)</span>
+<span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj,</span><span class="methods">String </span><span>message)</span>
+<span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj,</span><span class="methods">Supplier </span>{{openAngle}}<span class="methods">String</span>{{closeAngle}} <span>messageSupplier)</span>
+</pre>
+  </div>
+</div>
+<div class="row">
+  <span class="ad-p">These are some methods which are included in java 8. We will discuss one by one in detail.</span>
+ <p class="ad-p">We will also discuss about an important Utility method</p>
+ <pre style="width: 500px"><a routerLink="/objects/page/2"><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</a></pre> 
+  <br/>
+  <p class="ad-p">All the  methods belong to class <span class="methods">Objects</span> which are utility methods for operating on objects.
+  Point to be remembered all methods are <span class="methods">static</span>. Let's see how we can use these methods.</p>
+  <hr>
+  <h2>How to use isNull and nonNull</h2>
+  <hr>
+
+<pre style="width: 350px">
+  <span class="java-key">public static boolean </span><span>isNull (</span><span class="methods">Object </span><span>obj)</span>
+</pre>
+<p class="ad-p">The Method has very simple implementation. It is nothing but a null check and equivalent to <span><code style="width:100px">obj==null</code>. 
+  Method will return true if object is equal to null. </span> </p>
+ <br/>
+ <pre style="width: 350px">
+  <span class="java-key">public static boolean </span><span>nonNull (</span><span class="methods">Object </span><span>obj)</span>
+</pre>
+<p class="ad-p">This Method is vice versa of the above one. It will return true if <code>object!=null</code></p>
+<br/>
+<p class="ad-example">Example:</p>
+<code>Employee.java</code>
+<pre style="width:500px">
+<span class="java-key">public class </span>Employee {{oC}}
+
+  <span class="java-key">private int </span><span class="methods">id</span>;
+  <span class="java-key">private </span>String <span class="methods">name</span>;
+  <span class="java-key">public </span>Employee(<span class="java-key">int </span>id, String name) {{oC}}
+    <span class="java-key">super</span>();
+    <span class="java-key">this</span>.<span class="methods">id</span> = id;
+    <span class="java-key">this</span>.<span class="methods">name</span> = name;
+  {{cC}}
+  <span class="java-key">private int </span>getId() {{oC}}
+    <span class="java-key">return </span><span class="methods">id</span>;
+  {{cC}}
+  <span class="java-key">public void </span>setId(<span class="java-key">int </span>id) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">id</span> = id;
+  {{cC}}
+  <span class="java-key">public String </span>getName() {{oC}}
+    <span class="java-key">return </span><span class="methods">name</span>;
+  {{cC}}
+  <span class="java-key">public void </span>setName(String name) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">name</span> = id;
+  {{cC}}
+{{cC}}
+</pre>
+<code>ObjectsUtil.java</code>
+<pre style="width:500px">
+  <span class="java-key">public class </span> ObjectsUtil {{oC}}
+
+      <span class="java-key">public static void </span>main(String[] args) {{oC}}
+        Employee e1=<span class="java-key">new </span>Employee(1, "Alex");
+
+        //return true if object is null
+        <span class="java-key">if</span>(Objects.isNull(e1)){{oC}}
+          System.<span class="methods">out</span>.println(<span class="methods">"Object is null"</span>);
+        {{cC}}<span class="java-key">else</span>{{oC}}
+          System.<span class="methods">out</span>.println(<span class="methods">"Object is not null"</span>);
+        {{cC}}
+      
+        //return true if object is not null
+        <span class="java-key">if</span>(Objects.nonNull(e1)){{oC}}
+          System.<span class="methods">out</span>.println(<span class="methods">"Object is not null"</span>);
+        {{cC}}<span class="java-key">else</span>{{oC}}
+          System.<span class="methods">out</span>.println(<span class="methods">"Object is null"</span>);
+        {{cC}}    
+    {{cC}}
+  {{cC}}
+</pre>
+<br/>
+<code>Output</code>
+<pre style="width:200px">
+  Object is not null
+  Object is not null
+</pre>
+<div class="row">
+  <div style="float: right">
+      <a href="/objects/page/1" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>
+  </div>
+</div>
+</div>
+</div>

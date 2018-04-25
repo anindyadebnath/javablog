@@ -1,0 +1,84 @@
+<div class="row">
+  <h2>Method Reference and uses</h2>
+<hr>
+<p class="ad-p">Method reference is very inetersting addition in Java 8. It has made Java more simple and concise. Like earlier we can refer an Object with same type, now we are allowed to pass method as argument which has same method signature and arguent type.</p>
+<p class="ad-p">Let's take an exmaple to dig into more. Our Insurance Client wants to know some future staticstics about their business. They asked us, what will be the count of Standard plans after 1 year, 2 years, ... ,5 years.</p>
+<p class="ad-p">We know Standard Plan only applies for the age above 18. So, we have to chek how many user will be above age of 18 after 1,2,...,5 years respectively.</p>
+<code>User.java</code>
+<pre style="width:600px">
+<span class="java-key">public class</span> User {{oC}}
+
+  <span class="java-key">private</span> String <span class="methods">userName</span>;
+  <span class="java-key">private</span> Tier <span class="methods">tier</span>;
+  <span class="java-key">private int</span> <span class="methods">age</span>;
+
+  <span class="java-key">public</span> User() {{oC}}
+    <span class="java-key">super</span>();
+  }
+      
+  <span class="java-key">public</span> User(String userName, int age) {{oC}}
+    <span class="java-key">super</span>();
+    <span class="java-key">this</span>.<span class="methods">userName</span> = userName;
+    <span class="java-key">this</span>.<span class="methods">age</span> = age;
+  }
+  <span class="java-key">public int</span> getAge () {{oC}}
+    <span class="java-key">return</span> <span class="methods">age</span>;
+  }
+  <span class="java-key">public void</span> setAge(<span class="methods">int</span> age) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">age</span> = age;
+  }
+  <span class="java-key">public </span>String getUserName() {{oC}}
+    <span class="java-key">return</span> <span class="methods">userName</span>;
+  }
+  <span class="java-key">public void</span> setUserName(String userName) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">userName</span> = userName;
+  }
+  <span class="java-key">public</span> Tier getTier() {{oC}}
+    <span class="java-key">return</span> <span class="methods">tier</span>;
+  } 
+  <span class="java-key">public void</span> setTier(Tier tier) {{oC}}
+    <span class="java-key">this</span>.<span class="methods">tier</span> = tier;
+  }
+} 
+</pre>
+<p class="ad-p">Let's create a Function <span class="methods">getUserAgeAfter1YearFunc</span> using Functional Inteface <span class="methods">Function </span>, which has input type User and returns Integer. We will call another function <span class="methods">getCountofStandardPlanAfter1Year()</span> with argument List of Users and getUserAgeAfter1YearFunc.</p>
+<code>MethodReference.java</code>
+<pre>
+<span class="java-key">public class </span>MethodReference {{oC}}
+
+  <span class="java-key">public void </span> showCount(Function{{oA}}User, Integer{{cA}} func){{oC}}
+    <span class="java-key">int</span> count=getCountofStandardPlanAfter1Year(UserFactory.getUsers(), func);
+    System.<span class="methods">out</span>.println(count);
+  }
+
+  <span class="java-key">public int </span>getCountofStandardPlanAfter1Year(List{{oA}}User{{cA}} users,Function{{oA}}User, Integer{{cA}} func){{oC}}
+    <span class="java-key">int</span> count=0;
+    <span class="java-key">for</span>(User user:users){{oC}}
+      <span class="java-key">if</span>(func.apply(user)>18){{oC}}
+        count++;
+      }
+    }
+    <span class="java-key">return</span> count;	
+  }
+
+  <span class="java-key">public static void</span> main(String[] args) {{oC}}
+    Function{{oA}}User, Integer{{cA}} getUserAgeAfter1YearFunc=user->user.getAge()+1;
+    Function{{oA}}User, Integer{{cA}} getUserAgeAfter2YearFunc=user->user.getAge()+2;
+    <span class="java-key">new</span> MethodReference().showCount(getUserAgeAfter1YearFunc);
+  }
+}
+</pre>
+<p class="ad-p">For getting count of Standard Plan after 2,3,4 and 5 we just need to create Function as I did for 2 years <span class="methods">getUserAgeAfter2YearFunc</span> and pass it through our <span class="methods">showCount</span> method.</p>
+<p class="ad-p">I hope the example is simple and clear to you guys.</p>
+<p class="ad-p">Now, we will see where we can use Method Reference in our example. We can replace <span class="methods">getUserAgeAfter1YearFunc</span> with our newly created function on User class if we write same argument and return type as <span class="methods">getUserAgeAfter1YearFunc</span> like below.</p>
+<pre>
+  <span class="java-key">public static int</span> getUserAgeAfter1Year(User user){{oC}}
+    <span class="java-key">return</span> user.getAge()+1;
+ }
+</pre>
+<p class="ad-p">The above function is exactly same as <span class="methods">getUserAgeAfter1YearFunc</span>. It is taking User as argument and returning an Integer value. So, we can use this newly added function instead of <span class="methods">getUserAgeAfter1YearFunc</span>.</p>
+<p class="ad-p">Our <span class="methods">showCount( )</span> method is expecting a Function which has an argument of type User and return value of Integer. Because both <span class="methods">getUserAgeAfter1YearFunc</span> and <span class="methods">getUserAgeAfter1Year</span> (in User class) are same we can replace our code <code>new MethodReference().showCount(getUserAgeAfter1YearFunc);</code> with <code>new MethodReference().showCount(User::getUserAgeAfter1Year);</code></p>
+<p class="ad-p">The modified code will do exactly same as earlier. Let's understand the syntax.</p>
+<img src="../assets/methodRef1.jpg" style="width:800px;height: 290px" alt="Method Reference">
+<p class="ad-p">If we change the method static to instance, the reference call will be <code>new User()::getUserAgeAfter1Year</code></p>
+</div>

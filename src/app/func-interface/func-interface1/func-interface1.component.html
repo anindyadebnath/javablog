@@ -1,0 +1,32 @@
+<div class="row">
+    <h2>Use of Consumer and Predicate with example</h2>
+    <hr>
+  <p class="ad-p">Now let's talk about <span class="methods">Consumer</span>. We have already seen, the return type of it's abstract
+  method is <code>void</code>. Which means we can't return anything, we can only modify the object which is passed.</p>
+<p class="ad-p">All we have must Iterate List and Set by for loop like I did in previous example where I set Tier Plan of each User.</p>
+<p class="ad-p">Java SE8 intruduced a new default function <code>void forEach(Consumer{{oA}}? super T{{cA}} action)</code> in Interface Iterable which internaly Iterate by for loop and implement accept( ) function of Consumer.</p>
+<p class="ad-p">Let's use forEach instead of for loop and make our previous example code more precise.</p>
+<pre style="width:600px">
+<span class="methods">users</span>.forEach(<span class="methods">user</span>->{{oC}}
+    <span class="methods">user</span>.setTier((<span class="methods">user</span>.getAge(){{oA}}18)?<span class="methods">babyTier</span>.get():<span class="methods">standardTier</span>.get());
+}); 
+</pre>
+<p class="ad-p">We generally check condition in <span class="methods">if</span> clause if condition is less otherwise we create separate method which return a boolean result. You can say <span class="methods">Predicate</span> also does the same work, based on any condition it returns true or false. Let's modify our Age check with Predicate.</p>
+<pre>
+  Predicate{{oA}}<span class="methods">User</span>{{cA}} isUnderEighteen=<span class="methods">user</span>->{{oC}}<span class="java-key">return</span> (<span class="methods">user</span>.getAge(){{oA}}18)?<span class="java-key">true</span>:<span class="java-key">false</span>;};
+  
+  <span class="methods">users</span>.forEach(<span class="methods">user</span>->{{oC}}
+    <span class="methods">user</span>.setTier((isUnderEighteen.test(<span class="methods">user</span>))?<span class="methods">babyTier</span>.get():<span class="methods">standardTier</span>.get());
+  });
+</pre>
+<p class="ad-p">We can also combine our condition check with <span class="methods">Predicate</span>. Suppose, we want to give Standard Plan only for User whos age is in between 18 and 60. Let's write it's logic.</p>
+<pre>
+  Predicate{{oA}}<span class="methods">User</span>{{cA}} isAboveEighteen=<span class="methods">user</span>->{{oC}}<span class="java-key">return</span> (<span class="methods">user</span>.getAge(){{cA}}18)?<span class="java-key">true</span>:<span class="java-key">false</span>;};
+  Predicate{{oA}}<span class="methods">User</span>{{cA}} isUnderSixty=<span class="methods">user</span>->{{oC}}<span class="java-key">return</span> (<span class="methods">user</span>.getAge(){{oA}}60)?<span class="java-key">true</span>:<span class="java-key">false</span>;};
+
+  <span class="methods">users</span>.forEach(<span class="methods">user</span>->{{oC}}
+    <span class="methods">user</span>.setTier((isAboveEighteen.and(isUnderSixty).test(<span class="methods">user</span>))?<span class="methods">standardTier</span>.get():<span class="methods">babyTier</span>.get());
+  });
+</pre>
+<p class="ad-p">I hope you all now got an basic idea how <span class="methods">Supplier</span>,<span class="methods">Consumer</span>,<span class="methods">Predicate</span> works.</p>
+</div>

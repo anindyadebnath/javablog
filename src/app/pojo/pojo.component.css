@@ -1,0 +1,31 @@
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 00px;
+    font-size: 13px;
+    line-height: 1.2;
+    color: aliceblue;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #4b4d4f;
+    border: none;
+    border-radius: 0px;
+}
+
+.my-code-block {
+    border-style: solid;
+    border-width: 5px;
+    border-color: #f4e842;
+    background-color: #4b4d4f;
+    color: aliceblue;
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    height: 500px;
+}
+.ad-content-padding{
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 20px;
+    padding-bottom: 80px;
+}

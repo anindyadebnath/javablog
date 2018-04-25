@@ -1,0 +1,87 @@
+<div class="row">
+<h3>Create POJO</h3>
+<hr>
+<div class="row">
+  <div class="col-sm-5" style="margin-left: -40px">
+      <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Class Name :</label>
+            <div class="col-sm-6">
+               <input class="form-control" [(ngModel)]="className" type="text" name="className" id="className">
+            </div>
+        </div>
+      </form>
+  </div>
+  <div class="col-sm-4" style="margin-left: 180px; margin-top:10px;">
+    <form>
+        <label class="checkbox-inline">
+          <input type="checkbox" (click)="setDConstructor()" value="">Default Constructor
+        </label>
+      </form>
+</div>
+</div>
+<hr>
+
+<div class="row">
+        <div class="col-sm-12">
+            <app-add-attribute (attCreated)="addAttribute($event)"></app-add-attribute>
+        </div>
+        
+</div>
+<hr>
+<div class="row">
+    <div class="col-sm-7 my-code-block">
+        <pre>public class {{className}} {{openCurly}}</pre>
+        <p>&nbsp;</p>
+            <div class="my-tab">
+                <app-attribute *ngFor="let att of attributes"[att]="att"></app-attribute>
+                <div *ngIf="dConstructor">
+<pre>public {{className}}() {{openCurly}}
+    super();
+{{closeCurly}}</pre>                    
+               </div>
+                <div *ngFor="let elt of paramsForConstructorList">
+                    <div *ngIf="elt.paramsForConstructor.length>3">
+<pre>public {{className}}({{elt.paramsForConstructor}}) {{openCurly}}
+    super();</pre>
+                            <div *ngFor="let att of elt.params">
+                                <div *ngIf="att.isSelected==='Y'">
+                                    <pre style="line-height:0">   this.{{att.attName}}={{att.attName}};</pre>
+                                </div>
+                            </div>
+                            <div>{{closeCurly}}</div>
+                        </div>
+                </div>
+                <pre>
+                </pre>
+                <app-getset *ngFor="let att of attributes"[att]="att"></app-getset>
+            </div>
+        
+<pre>{{closeCurly}}</pre>
+    </div>
+        
+    <div class="col-sm-4" style="margin-left: 20px;">
+        <div class="row">
+            <div class="col-sm-7" style="margin-top:10px">
+            <form>
+                <label class="checkbox-inline">
+                    <input type="checkbox" (click)="onParamConstructor()" value="">Param Constructor
+                </label>
+            </form>
+            </div>
+            <div class="col-sm-4" style="margin-left: -10px">
+                <button type="button" (click)="createParamConstructor()" class="btn btn-primary col-sm-12 my-btn-round">Create</button>
+            </div>
+        </div>
+        <hr>
+        <div *ngIf="pConstructor">
+            <div *ngFor="let att of attributes">
+                <label *ngIf="att.attName!==''" class="checkbox-inline">
+                        <input type="checkbox" (click)="onSetParamConstructor($event)" [checked]=att.isChecked value={{att.attName}}>{{att.attName}}
+                </label>
+            </div>
+        </div>  
+    
+</div>
+</div>
+</div>
