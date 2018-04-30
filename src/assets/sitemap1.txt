@@ -1,0 +1,9 @@
+https://www.java-lovers.com/index.html#/pojo
+https://www.java-lovers.com/index.html#/objects
+https://www.java-lovers.com/index.html#/objects/page/1
+https://www.java-lovers.com/index.html#/objects/page/2
+https://www.java-lovers.com/index.html#/lambda
+https://www.java-lovers.com/index.html#/supplier-consume-predicate
+https://www.java-lovers.com/index.html#/supplier-consume-predicate/page/1
+https://www.java-lovers.com/index.html#/interface
+https://www.java-lovers.com/index.html#/method-reference
