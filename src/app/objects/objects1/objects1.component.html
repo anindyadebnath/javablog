@@ -1,14 +1,13 @@
 <div class="row">
-  <br/>
   <h2>How to use requireNonNull</h2>
   <hr>
-<pre style="width: 500px">
+<pre>
   <span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj)</span></pre>
 <p class="ad-p">The Method returns the object which is passed as param if object is not null. It is a very usefull method where we want to assign non null object.
   Let's modify our <code>Employee</code> Object.</p>
   <p class="ad-p">Assume, We have a requirement that our Employee should have a name. That's fine! No Problem. Just replace
     the Constructor with below one.</p>
-<pre style="width: 500px">
+<pre>
   <span class="java-key">public </span>Employee(<span class="java-key">int </span>id, String name) {{oC}}
     <span class="java-key">super</span>();
     <span class="java-key">this</span>.<span class="methods">id</span> = id;
@@ -17,7 +16,7 @@
 </pre>
 <p class="ad-p">Remember! We have a setter method too to set the name. This is your task to replace it with correct one.</p>
 <p class="ad-p">Now If we try to create an Emplyee Object as below</p>
-<pre style="width: 500px">
+<pre>
   Employee e1=<span class="java-key">new </span>Employee(1,<span class="java-key">null</span>);
 </pre>
 <p class="ad-p">We will get <code>java.lang.NullPointerException </code>because name can not be assign as null.</p>
@@ -32,14 +31,14 @@
   <p class="ad-p">You can say, Hey we have error message. That clearly
   shows Exception is bieng thrown from <span class="methods">Employee class line 15</span>.</p>
   <p class="ad-p">In real life scenario It is hard to find among thousand lines of code. So, to help in this case we will use below methods.</p>
-<pre style="width: 500px">
+<pre>
   <span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj,</span><span class="methods">String </span><span>message)</span></pre>
 <p class="ad-p">Just replace the line</p>
-<pre style="width: 500px"><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name);</pre>
+<pre><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name);</pre>
 <p class="ad-p">with</p>
-<pre style="width: 600px"><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">"Employee Name is Null in Constructor"</span>);</pre>
+<pre><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">"Employee Name is Null in Constructor"</span>);</pre>
 <p class="ad-p">Now If we run our code, we will get Exception with proper message</p>
-<pre style="width: 800px"><span class="java-key">Exception in thread "main" </span><span class="methods">java.lang.NullPointerException</span> <span class="java-key">: Employee Name is Null in Constructor</span></pre>
+<pre><span class="java-key">Exception in thread "main" </span><span class="methods">java.lang.NullPointerException</span> <span class="java-key">: Employee Name is Null in Constructor</span></pre>
 <p class="ad-p">OK. That's good. But Don't you think that the message is always been created either object is null or not. Can we handel this scenario in other way.</p>
 <p class="ad-p">Let's assume, A Blockbuster movie is realesed and you are selling the tickets from Counter. We might have to keep changing the status of display board from <span style="font-style: italic">TICKETS AVAILABLE to HOUSEFULL</span>.</p>
 <p class="ad-p">So, you are thinking that why I am writing it again and again. Let's make a Paper Board of HOUSEFULL and when tickets are over I will tell someone to hang the Board over the gate.</p>
@@ -48,18 +47,18 @@
   href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/8-b132/java/util/function/Supplier.java#Supplier"><code>Supplier{{openAngle}}T{{closeAngle}}</code></a>. We are going to use this interface.</p>
 
 <p class="ad-p">First create a reference <span class="methods">messageSupplier</span> of the <code>Supplier{{openAngle}}String{{closeAngle}}</code> with implementation.</p>
-<pre style="width: 800px"><span class="java-key">private </span>Supplier{{openAngle}}String{{closeAngle}} <span class="methods">messageSupplier</span>=()-{{closeAngle}}{{oC}} <span class="java-key">return </span><span class="methods">"Error occured in Constructor"</span>;{{cC}};</pre>
+<pre><span class="java-key">private </span>Supplier{{openAngle}}String{{closeAngle}} <span class="methods">messageSupplier</span>=()-{{closeAngle}}{{oC}} <span class="java-key">return </span><span class="methods">"Error occured in Constructor"</span>;{{cC}};</pre>
 <p class="ad-p">Then replace the line </p>
-<pre style="width: 600px"><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">"Employee Name is Null in Constructor"</span>);</pre>
+<pre><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">"Employee Name is Null in Constructor"</span>);</pre>
 <p class="ad-p">with</p>
-<pre style="width: 900px"><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">messageSupplier</span>);</pre>
+<pre><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods">messageSupplier</span>);</pre>
 <p class="ad-p">Or we can directly pass the messageSupplier implementation by lammda expression like below.</p>
-<pre style="width: 900px"><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods"></span>()-{{closeAngle}}{{oC}} <span class="java-key">return </span><span class="methods">"Name is Null, Error occured in Constructor"</span>;{{cC}});</pre>
+<pre><span class="java-key">this</span>.<span class="methods">name</span> = Objects.requireNonNull(name,<span class="methods"></span>()-{{closeAngle}}{{oC}} <span class="java-key">return </span><span class="methods">"Name is Null, Error occured in Constructor"</span>;{{cC}});</pre>
 <p class="ad-p">No need to create a reference as before.The new line will do the same task as before but question arise when to call this method. It's simple, when we need common message create a reference otherwise implement <code>Supplier{{openAngle}}String{{closeAngle}}</code>.</p>
 <p class="ad-p">Anyone not familiar with <span style="font-style: italic;font-weight: bold">lambda</span> please visit <a routerLink="/lambda">lambda</a> Tutorial first. Hope all Objects Utility methods are now familiar to you guys.</p>
 <br/>
 <div class="row">
-  <div style="float: right">
+  <div style="float: right;padding: 30px">
       <a href="/objects/page/2" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>
   </div>
 </div>

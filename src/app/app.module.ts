@@ -1,3 +1,4 @@
+import { ConsolesizeService } from './services/consolesize.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +26,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AboutmeComponent } from './aboutme/aboutme.component';
 import { StreamComponent } from './stream/stream.component';
+import { ComingsoonComponent } from './comingsoon/comingsoon.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 const appRoutes: Routes = [
   {path: '' , component: HomeComponent},
   {path: 'pojo' , component: PojoComponent},
@@ -56,7 +59,9 @@ const appRoutes: Routes = [
     MethodRefComponent,
     ContactusComponent,
     AboutmeComponent,
-    StreamComponent
+    StreamComponent,
+    ComingsoonComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
@@ -73,13 +78,13 @@ const appRoutes: Routes = [
     MatMenuModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ConsolesizeService],
   exports: [
     MatToolbarModule,
     MatIconModule,
     ],
   bootstrap: [AppComponent],
-  entryComponents: [ContactusComponent, AboutmeComponent]
+  entryComponents: [ContactusComponent, AboutmeComponent, ComingsoonComponent, PrivacyComponent]
 })
 export class AppModule { }
 

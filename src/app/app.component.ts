@@ -1,6 +1,8 @@
+import { PrivacyComponent } from './privacy/privacy.component';
+import { ComingsoonComponent } from './comingsoon/comingsoon.component';
 import { AboutmeComponent } from './aboutme/aboutme.component';
 import { ContactusComponent } from './contactus/contactus.component';
-import { Component , ChangeDetectorRef, OnDestroy} from '@angular/core';
+import { Component, ChangeDetectorRef, OnDestroy, ViewEncapsulation } from '@angular/core';
 import {MediaMatcher, BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/Subscription';
 import { BreakpointState } from '@angular/cdk/layout';
@@ -9,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnDestroy {
   isMobile: boolean;
@@ -51,7 +53,19 @@ export class AppComponent implements OnDestroy {
     });
   }
 
-  public setTitle( newTitle: string) {
-    this.titleService.setTitle( newTitle );
+  openPrivacyPolicy(): void {
+    const dialogRef = this.dialog.open(PrivacyComponent, {
+      height: '580px',
+      width : '800px',
+      hasBackdrop: true,
+    });
+  }
+
+  commingSoon(): void {
+    const dialogRef = this.dialog.open(ComingsoonComponent, {
+      height: 'auto',
+      width : '400px',
+      hasBackdrop: true,
+    });
   }
 }

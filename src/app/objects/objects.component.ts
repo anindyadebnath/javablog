@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
+import { ConsolesizeService } from '../services/consolesize.service';
 
 @Component({
   selector: 'app-objects',
@@ -11,8 +12,9 @@ export class ObjectsComponent implements OnInit {
   closeAngle = '>';
   oC = '{';
   cC = '}';
+  isMobile = false;
 
-  constructor(private titleService: Title, private meta: Meta) {
+  constructor(private titleService: Title, private meta: Meta, consoleService: ConsolesizeService) {
     this.titleService.setTitle('How to use isNull and nonNull');
     this.meta.addTags([
       {name: 'description', content: 'Some new methods which are included in Objects class in java 8.'
@@ -21,6 +23,7 @@ export class ObjectsComponent implements OnInit {
       {name: 'author', content: 'java-lovers'},
       {name: 'keywords', content: 'isNull,nonNull ,requireNonNull'}
     ]);
+    this.isMobile = consoleService.isMobile;
    }
 
   ngOnInit() {

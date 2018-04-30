@@ -1,8 +1,7 @@
 <div class="row">
-  <br/>
   <h2>How to use deepEquals</h2>
   <hr>
-<pre style="width: 500px"><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</pre> 
+<pre><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</pre> 
 <p class="ad-p">I don't know How many of us use this method. Let's jump into this to know what the method does.</p>
 <ul>
   <li class="ad-p">It first check if <code>a==b</code> and basic <code>null</code>check</li>
@@ -14,7 +13,7 @@
 Same for List also, <code>AbstractList.equals</code> method will be called.</p>
 
 <p class="ad-p">Add the following equals and hashCode function in Employee class</p>
-<pre style="width:500px">
+<pre>
   <span class="java-key">public int </span>hashCode(){{oC}}
     <span class="java-key">return </span>111*<span class="methods">name</span>.hashCode();
   {{cC}}
@@ -30,7 +29,7 @@ Same for List also, <code>AbstractList.equals</code> method will be called.</p>
 
 
 <code>ObjectsUtil.java</code>
-<pre style="width:800px">
+<pre>
   <span class="java-key">public class </span> ObjectsUtil {{oC}}
     <span class="java-key">public static void </span>main(String[] args) {{oC}}
       Employee e1=<span class="java-key">new </span>Employee(1, "Alex");
@@ -61,7 +60,7 @@ Same for List also, <code>AbstractList.equals</code> method will be called.</p>
 </pre>
 <br/>
 <code>Output</code>
-<pre style="width:500px">
+<pre>
   Employee e1 and e2 are equal:false
   Employee List list1 and list are equal:true
   Employee List list1 and list are equal:true

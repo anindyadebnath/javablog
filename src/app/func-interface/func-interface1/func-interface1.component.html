@@ -6,7 +6,7 @@
 <p class="ad-p">All we have must Iterate List and Set by for loop like I did in previous example where I set Tier Plan of each User.</p>
 <p class="ad-p">Java SE8 intruduced a new default function <code>void forEach(Consumer{{oA}}? super T{{cA}} action)</code> in Interface Iterable which internaly Iterate by for loop and implement accept( ) function of Consumer.</p>
 <p class="ad-p">Let's use forEach instead of for loop and make our previous example code more precise.</p>
-<pre style="width:600px">
+<pre>
 <span class="methods">users</span>.forEach(<span class="methods">user</span>->{{oC}}
     <span class="methods">user</span>.setTier((<span class="methods">user</span>.getAge(){{oA}}18)?<span class="methods">babyTier</span>.get():<span class="methods">standardTier</span>.get());
 }); 

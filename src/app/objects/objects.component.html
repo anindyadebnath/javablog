@@ -2,7 +2,7 @@
 <div class="row" >
     <h2>New utility methods in Objects added in Java 8</h2>
     <hr>
-  <div class="col-md-8">
+  
 <pre>
 <span class="java-key">public static boolean </span><span>isNull (</span><span class="methods">Object </span><span>obj)</span>
 <span class="java-key">public static boolean </span><span>nonNull (</span><span class="methods">Object </span><span>obj)</span>
@@ -10,12 +10,11 @@
 <span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj,</span><span class="methods">String </span><span>message)</span>
 <span class="java-key">public static </span><span>{{openAngle}}T{{closeAngle}} T requireNonNull (</span><span>T obj,</span><span class="methods">Supplier </span>{{openAngle}}<span class="methods">String</span>{{closeAngle}} <span>messageSupplier)</span>
 </pre>
-  </div>
 </div>
 <div class="row">
   <span class="ad-p">These are some methods which are included in java 8. We will discuss one by one in detail.</span>
  <p class="ad-p">We will also discuss about an important Utility method</p>
- <pre style="width: 500px"><a routerLink="/objects/page/2"><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</a></pre> 
+ <pre><a routerLink="/objects/page/2"><span class="java-key">public static boolean </span>deepEquals (<span class="methods">Object </span>a,<span class="methods">Object </span>b)</a></pre> 
   <br/>
   <p class="ad-p">All the  methods belong to class <span class="methods">Objects</span> which are utility methods for operating on objects.
   Point to be remembered all methods are <span class="methods">static</span>. Let's see how we can use these methods.</p>
@@ -23,20 +22,20 @@
   <h2>How to use isNull and nonNull</h2>
   <hr>
 
-<pre style="width: 350px">
+<pre>
   <span class="java-key">public static boolean </span><span>isNull (</span><span class="methods">Object </span><span>obj)</span>
 </pre>
 <p class="ad-p">The Method has very simple implementation. It is nothing but a null check and equivalent to <span><code style="width:100px">obj==null</code>. 
   Method will return true if object is equal to null. </span> </p>
  <br/>
- <pre style="width: 350px">
+ <pre>
   <span class="java-key">public static boolean </span><span>nonNull (</span><span class="methods">Object </span><span>obj)</span>
 </pre>
 <p class="ad-p">This Method is vice versa of the above one. It will return true if <code>object!=null</code></p>
 <br/>
 <p class="ad-example">Example:</p>
 <code>Employee.java</code>
-<pre style="width:500px">
+<pre >
 <span class="java-key">public class </span>Employee {{oC}}
 
   <span class="java-key">private int </span><span class="methods">id</span>;
@@ -61,7 +60,7 @@
 {{cC}}
 </pre>
 <code>ObjectsUtil.java</code>
-<pre style="width:500px">
+<pre>
   <span class="java-key">public class </span> ObjectsUtil {{oC}}
 
       <span class="java-key">public static void </span>main(String[] args) {{oC}}
@@ -90,7 +89,7 @@
   Object is not null
 </pre>
 <div class="row">
-  <div style="float: right">
+  <div style="float: right; padding: 30px">
       <a href="/objects/page/1" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-right"></span> Next</a>
   </div>
 </div>

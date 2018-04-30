@@ -2,6 +2,7 @@
     box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
     display: block;
     padding: 0px;
+    border-radius: 2px;
     box-sizing: border-box;
     overflow: auto;
     outline: 0;
@@ -22,10 +23,10 @@
 .mat-dialog-content{
     display: block;
     margin: 0 0px;
-    padding: 20px 20px;
-    max-height: 400px;
+    padding: 30px;
+    max-height: 530px;
     overflow: auto;
-    height: 400px;
+    height: 530px;
     background: #fff;
 }
 a{
@@ -37,23 +38,23 @@ a :hover{
     cursor: pointer;
 }
 
-.about-header-image {
-    background-size: cover; 
-    border-radius: 50%;
-    background-image: url("../../assets/me.jpg");
-    flex-shrink: 0;
-    height: 150px;
-    width:150px; 
-    margin: auto;
+#ppBody
+{
+    font-size:11pt;
+    width:100%;
+    margin:0 auto;
+    text-align:justify;
 }
 
-.ad-about-p{
-    
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+#ppHeader
+{
+    font-family:verdana;
+    font-size:21pt;
+    width:100%;
+    margin:0 auto;
 }
 
-.ad-aboutme-name{
-    color:darkblue;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-left: 88px;
+.ppConsistencies
+{
+    display:none;
 }

@@ -44,7 +44,7 @@
     color:#fff;
     margin-left: 50px;
     font-style: italic;
-    margin-top: 7px;
+    margin-top: -4px;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -115,15 +115,16 @@ mark{
 
 mat-sidenav{
     width: 300px;
-    background: #091e3f;
+    background-color: #091e3f;
 }
 
 
 mat-toolbar h1{
     color:#fff;
 }
-mat-toolbar{
+.mat-toolbar{
     background: #673ab7;
+    color:#fff;
 }
 
 .ad-menu-btn{
@@ -140,13 +141,13 @@ mat-toolbar{
 }
 
 .ad-content-padding{
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 }
 .ad-content-padding-mobile{
-    padding: 20px;
+    padding: 50px;
 }
 .ad-menu-left a:hover{
     color: #18cc08;
@@ -161,6 +162,7 @@ mat-toolbar a{
     font-family:sans-serif;
     font-weight: bold;
     font-size: 15px;
+    border: none;
 }
 
 mat-toolbar a:focus{

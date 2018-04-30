@@ -17,7 +17,7 @@
         <li>and a terminal operation.</li>
     </ul>
     <p class="ad-p">Below is an example of Stream Pipeline.</p>
-    <pre style="width:700px">
+    <pre>
         IntStream inputs=IntStream.rangeClosed(1, 100);
         <span class="java-key">long</span> evenCount=inputs                                   <span class="methods">--Source</span>
                             .filter(elt->{{oC}}<span class="java-key">return</span> elt%2==0;})    <span class="methods">--intermediate operation</span>
@@ -44,7 +44,7 @@
     <p class="ad-p">To get distinct element from a stream we have to override equals and hashCode function. For all of the stream example we will be using Student Object which has
         attribute like int id, String userName, int standard. We are not going to cover how to write equals and hashCode here. Our main goal is to learn stream API.</p>
     <p class="ad-p">I have added equals function based on id and standard, which means we will not allow duplicate id for same standard.</p>
-    <pre style="width: 700px">
+    <pre>
     List{{oA}}Student> students=StudentFactory.getStudents();
     List{{oA}}Student> distStudents= students.stream()
                                         .distinct()
