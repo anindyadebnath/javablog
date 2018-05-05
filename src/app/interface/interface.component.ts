@@ -13,7 +13,7 @@ export class InterfaceComponent implements OnInit {
   oC = '{';
   cC = '}';
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('Inteface, static and default method');
+    this.titleService.setTitle('java 8 Inteface, static and default method');
     this.meta.addTags([
       {name: 'description', content: 'Prior to java SE8, Defination of an Interface was Abstract type and to use'
        + ' it\'s behavior a class must has to implement. But in java SE8 default and static method may have their'

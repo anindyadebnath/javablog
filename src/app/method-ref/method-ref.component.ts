@@ -12,7 +12,7 @@ export class MethodRefComponent implements OnInit {
   oC = '{';
   cC = '}';
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('Method Reference and uses');
+    this.titleService.setTitle('java 8 Method Reference');
     this.meta.addTags([
       {name: 'description', content: 'Method reference is very inetersting addition in Java 8. It has made Java more simple and concise.'
        + ' Like earlier we can refer an Object with same type, now we are allowed to pass method as argument'

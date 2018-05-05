@@ -16,9 +16,8 @@ export class Objects1Component implements OnInit {
   constructor(private titleService: Title, private meta: Meta) {
     this.titleService.setTitle('How to use requireNonNull');
     this.meta.addTags([
-      {name: 'description', content: 'Some new methods which are included in Objects class in java 8.'
-       + ' All the methods are utility methods for operating on objects.'
-       + 'Point to be remembered all methods are static.'},
+      {name: 'description', content: 'public static <T> T requireNonNull (T obj) returns the object which is passed as param ' 
+      + 'if object is not null. It is a very usefull method where we want to assign non null object.'},
       {name: 'author', content: 'java-lovers'},
       {name: 'keywords', content: 'isNull,nonNull ,requireNonNull'}
     ]);

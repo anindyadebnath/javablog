@@ -13,7 +13,7 @@ export class StreamComponent implements OnInit {
   oC = '{';
   cC = '}';
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('Stream-API');
+    this.titleService.setTitle('java 8 Stream api');
     this.meta.addTags([
       {name: 'description', content: 'Stream is a sort of Itarator. Stream is abstraction which represents zero or more values.'
        + ' Stream is not a Collection. Valuse might not be stored.'

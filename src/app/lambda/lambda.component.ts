@@ -14,7 +14,7 @@ export class LambdaComponent implements OnInit {
   cC = '}';
 
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('Lambda -> Expression and syntax');
+    this.titleService.setTitle('java 8 Lambda Expression and syntax');
     this.meta.addTags([
       {name: 'description', content: 'The most important and known feature of Java 8 is Lambda. Lambda is a anonymous function. '
        + ' Lambda expression lets us to define a class with single method (abstract) in a very concise manner.'},

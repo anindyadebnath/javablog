@@ -15,9 +15,9 @@ export class Objects2Component implements OnInit {
   constructor(private titleService: Title, private meta: Meta) {
     this.titleService.setTitle('How to use deepEquals');
     this.meta.addTags([
-      {name: 'description', content: 'We have two sets of Employee, if we try to check the equality by calling Objects.deepEquals method'
-       + ' It will ultimately call AbstractSet.equals method.'
-       + 'Same for List also, AbstractList.equals method will be called.'},
+      {name: 'description', content: 'public static boolean deepEquals (Object a,Object b) It first check if a==b and basic nullcheck'
+       + ' if a and b both are object array it call\'s Array\'s deepEquals0 method'
+       + 'if a and b both are not array of object or primitive data type, it calls data type\'s equals method'},
       {name: 'author', content: 'java-lovers'},
       {name: 'keywords', content: 'deepEquals, array equals, list equals, set equals'}
     ]);

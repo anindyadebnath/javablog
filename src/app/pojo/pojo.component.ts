@@ -19,12 +19,12 @@ export class PojoComponent implements OnInit {
   paramsForConstructor = '';
   paramsForConstructorList = [{params: [{dataType: '', attName: '', isSelected: ''}] , paramsForConstructor: ''}];
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('java-lovers|Create java pojo');
+    this.titleService.setTitle('Create pojo online');
     this.meta.addTags([
-      {name: 'description', content: 'Create Pojo is single page Pojo creater. Any one can easily create a pojo and'
+      {name: 'description', content: 'Create Pojo is single page java Pojo creater. Any one can easily create a pojo and'
        + ' copy paste the code in any code editor.'},
       {name: 'author', content: 'java-lovers'},
-      {name: 'keywords', content: 'java, pojo creater, create pojo, java pojo'}
+      {name: 'keywords', content: 'java, online pojo creater, create pojo, java pojo'}
     ]);
    }
 

@@ -13,7 +13,7 @@ export class FuncInterfaceComponent implements OnInit {
   oC = '{';
   cC = '}';
   constructor(private titleService: Title, private meta: Meta) {
-    this.titleService.setTitle('Functional Interface Supplier, Consumer, Predicate');
+    this.titleService.setTitle('java 8 Functional Interface Supplier, Consumer and Predicate with example');
     this.meta.addTags([
       {name: 'description', content: 'Supplier, Consumer and Predicate are most important Functional Interface in Java SE8.'
        + ' We will discuss each of them to know When and How to use in real life scenario.'},

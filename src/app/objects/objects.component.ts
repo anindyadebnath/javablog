@@ -17,7 +17,7 @@ export class ObjectsComponent implements OnInit {
   constructor(private titleService: Title, private meta: Meta, consoleService: ConsolesizeService) {
     this.titleService.setTitle('How to use isNull and nonNull');
     this.meta.addTags([
-      {name: 'description', content: 'Some new methods which are included in Objects class in java 8.'
+      {name: 'description', content: 'Some new methods like isNull,nonNull,requireNonNull are included in Objects class in java 8.'
        + ' All the methods are utility methods for operating on objects.'
        + 'Point to be remembered all methods are static.'},
       {name: 'author', content: 'java-lovers'},
