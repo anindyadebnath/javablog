@@ -85,7 +85,7 @@
                                                 })
                                                 .collect(Collectors.toList());   
     </pre>
-    <p class="ad-p"><code>map()</code>expects a <code>Function</code> (Please visit <a href="#/method-reference">method reference</a> to know more about function), we have implemented this function such a way that it returns
+    <p class="ad-p"><code>map()</code>expects a <code>Function</code> (Please visit <a href="method-reference">method reference</a> to know more about function), we have implemented this function such a way that it returns
      a student object after modification.</p>
      <br>
      <h2>How to know which element passed a certain point in a pipeline.</h2>
@@ -100,7 +100,7 @@
                                         .peek(elt->System.out.println(elt))
                                         .collect(Collectors.toList());
      </pre>
-     <p class="ad-p"><code>peek()</code> function expects a <code>Consumer</code>(Please visit <a href="#/supplier-consumer-predicate">supplier-consumer-predicate</a> to know more about Consumer) as argument, which means modifaction is not allowed.
+     <p class="ad-p"><code>peek()</code> function expects a <code>Consumer</code>(Please visit <a href="supplier-consumer-predicate">supplier-consumer-predicate</a> to know more about Consumer) as argument, which means modifaction is not allowed.
     This is a very handy function for debuging purpose.</p>
     <br>
     <h2>How to sort using sorted function from stream API.</h2>
@@ -161,7 +161,79 @@
                                     .collect(Collectors.toList());   
 </pre>
 <p class="ad-p">See, How easy it is to sort by stream.</p>
-<!-- <br>
-<h2>Use of collect function.</h2>
-<hr> -->
+<br>
+<h2>How to accumulate data using collect function.</h2>
+<hr>
+<p class="ad-p">We already used collect function ( <code>collect(Collectors.toList()</code> ) in many places to collect data in a specific type. Here collect function takes Collector Interface as an argument.
+We have a util class Collectors which returns List type of Collector to store the data. Let's use Set to store students (equals and hashCode already added)</p>
+<pre>
+    List{{oA}}Student> students=StudentFactory.getStudents();
+    Set{{oA}}Student> studentsSet= students.stream()
+                                      .collect(Collectors.toSet());   
+</pre>
+<p class="ad-p">We will see more about Collectors in next tutorials.</p>
+<br>
+<h2>How to use reduce function in stream.</h2>
+<hr>
+<p class="ad-p">Reduce is a terminal operation on a stream pipeline. It performs reduction on the elements of the stream. Stream API provides three overloaded reduce function.</p>
+<ul class="ad-p" style="color: #52a107">
+    <li>Optional{{oA}}T> reduce(BinaryOperator{{oA}}T> accumulator);</li>
+    <li>T reduce(T identity, BinaryOperator{{oA}}T> accumulator);</li>
+    <li>{{oA}}U> U reduce(U identity,BiFunction{{oA}}U, ? super T, U> accumulator,BinaryOperator{{oA}}U> combiner);</li>
+</ul>
+<p class="ad-p">Let's start one by one with easy example. We have list of Integers and we will calculate sum.</p>
+<ul class="ad-p" style="color: #52a107">
+    <li><h4>Optional{{oA}}T> reduce(BinaryOperator{{oA}}T> accumulator);</h4></li>
+</ul>
+<pre>
+    List{{oA}}Integer> ints=Arrays.asList(1,2,3,4);
+    Optional{{oA}}Integer> sum=ints.stream().reduce((a,b)->(a+b));
+                    or
+    Optional{{oA}}Integer> sum=ints.stream().reduce(Integer::sum);
+    System.out.println(sum.get());
+</pre>
+<p class="ad-p">Well, example is pretty easy. But we need to know how it internally works. See the below code snippet.</p>
+<pre>
+1.    <span class="java-key">private static Optional{{oA}}Integer></span> doSum(){{oC}}
+2.        List{{oA}}Integer> ints=Arrays.asList(1,2,3,4);
+3.        Ineteger result=<span class="java-key">null</span>;
+4.        <span class="java-key">boolean</span> isAny=<span class="java-key">false</span>;
+5.        <span class="java-key">for</span>(Integer number:ints) {{oC}}
+6.            <span class="java-key">if</span>(isFirstElement){{oC}}
+7.                isAny=<span class="java-key">true</span>;
+8.                result=number;
+9.            }<span class="java-key">else</span>{{oC}}
+10.                result=result+number;
+11.            }
+12.        }
+13.    <span class="java-key">return</span> isAny?Optional.of(result):Optional.empty();
+14.    }
+</pre>
+<p class="ad-p"><code>reduce</code> function iterate each element and does the operation which we pass as an argument. It takes the first element and stores the value in a variable 
+    which was initialized as null (like line #3 and #8 ). Then it takes the 2nd element and implement the operation (like line #10). So, basically <code>a</code> (in reduce function) is the first
+     element. If there is no other element, function will return the first value of stream, it will not perform any operation. If other element exist then the value is passed as <code>b</code> in our operation function
+      (Integer::sum). If there is no element in stream function will return <code>Optional.empty()</code> otherwise <code>Optional.of(result)</code>
+</p>
+<ul class="ad-p" style="color: #52a107">
+    <li><h4>T reduce(T identity, BinaryOperator{{oA}}T> accumulator);</h4></li>
+</ul>
+<p class="ad-p">This function is same as previous one, except this function gives us the opportunity to provide an offset value and it's type.
+    One things to remember type of identity and return type of operation should be same.
+</p>
+<pre>
+    List{{oA}}Integer> ints=Arrays.asList(1,2,3,4);
+    Integer sum=ints.stream().reduce(10,(a,b)->(a+b));
+                    or
+    Integer sum=ints.stream().reduce(10,Integer::sum);
+    System.out.println(sum.get());
+</pre>
+<p class="ad-p">Here, <code>10</code> is type of Integer and our function return type is also Integer. Unlike previous reduce function, identity value will be stored in <code>a</code> and with first element
+ (in <code>b</code>) it will perform our given function. Result will be stored in <code>a</code> and then it pickes the next element and performs the same.</p>
+ <ul class="ad-p" style="color: #52a107">
+    <li><h4>{{oA}}U> U reduce(U identity,BiFunction{{oA}}U, ? super T, U> accumulator,BinaryOperator{{oA}}U> combiner);</h4></li>
+</ul>
+<p class="ad-p">We will talk about this function later in Parallel Stream chapter.</p>
+<br>
+<p class="ad-p">Hope we covered all important topics of Stream and you guys loved it. </p>
+<p class="ad-p">Happy Learning!</p>
 </div>
